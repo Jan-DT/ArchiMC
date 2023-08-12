@@ -1,0 +1,6 @@
+{
+    "parent": "archimc:block/armless_chair",
+    "textures": {
+        "1": "minecraft:block/birch_planks"
+    }
+}

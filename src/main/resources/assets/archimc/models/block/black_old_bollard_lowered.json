@@ -1,0 +1,6 @@
+{
+    "parent": "archimc:block/old_bollard_lowered",
+    "textures": {
+        "1": "archimc:block/black_old_bollard"
+    }
+}

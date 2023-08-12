@@ -1,5 +1,6 @@
 {
   "itemGroup.archimc.street_decoration": "ArchiMC Street Decoration",
+  "itemGroup.archimc.furniture": "ArchiMC Furniture",
   "block.archimc.light_steel_modern_bollard": "Light Steel Modern Bollard",
   "block.archimc.steel_modern_bollard": "Steel Modern Bollard",
   "block.archimc.stone_modern_bollard": "Stone Modern Bollard",
@@ -8,5 +9,18 @@
   "block.archimc.steel_old_bollard": "Steel Old Bollard",
   "block.archimc.black_old_bollard": "Black Old Bollard",
   "block.archimc.green_old_bollard": "Green Old Bollard",
-  "block.archimc.red_old_bollard": "Red Old Bollard"
+  "block.archimc.red_old_bollard": "Red Old Bollard",
+  "block.archimc.light_steel_large_bollard": "Light Steel Large Bollard",
+  "block.archimc.steel_large_bollard": "Steel Large Bollard",
+  "block.archimc.oak_armless_chair": "Oak Armless Chair",
+  "block.archimc.spruce_armless_chair": "Spruce Armless Chair",
+  "block.archimc.birch_armless_chair": "Birch Armless Chair",
+  "block.archimc.jungle_armless_chair": "Jungle Armless Chair",
+  "block.archimc.acacia_armless_chair": "Acacia Armless Chair",
+  "block.archimc.dark_oak_armless_chair": "Dark Oak Armless Chair",
+  "block.archimc.mangrove_armless_chair": "Mangrove Armless Chair",
+  "block.archimc.cherry_armless_chair": "Cherry Armless Chair",
+  "block.archimc.bamboo_armless_chair": "Bamboo Armless Chair",
+  "block.archimc.crimson_armless_chair": "Crimson Armless Chair",
+  "block.archimc.warped_armless_chair": "Warped Armless Chair"
 }

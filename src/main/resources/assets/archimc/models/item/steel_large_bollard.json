@@ -1,0 +1,6 @@
+{
+    "parent": "archimc:block/large_bollard",
+    "textures": {
+        "1": "archimc:block/steel_large_bollard"
+    }
+}

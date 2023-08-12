@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "archimc:block/mangrove_armless_chair", "uvlock": false },
+    "facing=east":  { "model": "archimc:block/mangrove_armless_chair", "y":  90, "uvlock": false },
+    "facing=south": { "model": "archimc:block/mangrove_armless_chair", "y": 180, "uvlock": false },
+    "facing=west":  { "model": "archimc:block/mangrove_armless_chair", "y": 270, "uvlock": false }
+  }
+}

@@ -1,5 +1,6 @@
 {
 	"variants": {
-		"": { "model":  "archimc:block/black_old_bollard" }
+		"lowered=false": { "model":  "archimc:block/black_old_bollard" },
+		"lowered=true": { "model":  "archimc:block/black_old_bollard_lowered" }
 	}
 }
