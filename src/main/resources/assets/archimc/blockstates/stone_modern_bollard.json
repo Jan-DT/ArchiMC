@@ -1,5 +1,6 @@
 {
 	"variants": {
-		"": { "model":  "archimc:block/stone_modern_bollard" }
+		"lowered=false": { "model":  "archimc:block/stone_modern_bollard" },
+		"lowered=true": { "model":  "archimc:block/stone_modern_bollard_lowered" }
 	}
 }

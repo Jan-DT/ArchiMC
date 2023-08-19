@@ -1,5 +1,6 @@
 {
 	"variants": {
-		"": { "model":  "archimc:block/steel_large_bollard" }
+		"lowered=false": { "model":  "archimc:block/steel_large_bollard" },
+		"lowered=true": { "model":  "archimc:block/steel_large_bollard_lowered" }
 	}
 }

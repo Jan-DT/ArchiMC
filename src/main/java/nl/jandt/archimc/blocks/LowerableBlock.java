@@ -15,10 +15,20 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-public class OldBollard extends LowerableBlock {
+/**
+ * Block class that allows for blocks to be lowered when bottom slabs are placed underneath.
+ * Contains methods for the lowering of blocks on neighbor updates and placement.
+ * Meant to be inherited from blocks. The actual model for the lowerable blocks should be handled
+ * using the BlockStates file for that specific block (i.e. adding "lowered=false" and "lowered=true" in the .json).
+ *
+ * @author 4FA
+ * @version 1.0
+ * @since 0.1-ALPHA-3
+ */
+public class LowerableBlock extends Block {
     public static final BooleanProperty LOWERED = BooleanProperty.of("lowered");
 
-    public OldBollard(Settings settings) {
+    public LowerableBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(LOWERED, false));
     }
@@ -30,9 +40,11 @@ public class OldBollard extends LowerableBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
+        // Get the BlockState for the block below.
         BlockPos posBelow = ctx.getBlockPos().down();
         BlockState stateBelow = ctx.getWorld().getBlockState(posBelow);
 
+        // If the block below is a 'SlabBlock', and has the state TYPE == BOTTOM, then set the lowered state to true.
         if (stateBelow.getBlock() instanceof SlabBlock && stateBelow.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
             return getDefaultState().with(LOWERED, true);
         }
@@ -42,36 +54,27 @@ public class OldBollard extends LowerableBlock {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        // Check if the updated block is below this block.
         if (direction == Direction.DOWN) {
             if (neighborState.getBlock() instanceof SlabBlock && neighborState.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
-                return state.with(LOWERED, true);
+                // Then if the block below is a 'SlabBlock', and is a bottom slab, then set the lowered state to true.
+                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(LOWERED, true);
             } else {
-                return state.with(LOWERED, false);
+                // Otherwise, set the lowered state to false.
+                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(LOWERED, false);
             }
         }
 
+        // Any other block updates will just inherit the method.
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        VoxelShape shape = VoxelShapes.empty();
-
-        // If the 'lowered' BlockState is true, subtract .5 blocks from the VoxelShape y-position.
-        float y_change = state.get(LOWERED) ? -0.5f : 0.0f;
-
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.40625, 0.1875 + y_change, 0.40625, 0.59375, 1.25 + y_change, 0.59375));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0.0 + y_change, 0.375, 0.625, 0.1875 + y_change, 0.625));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0.4375 + y_change, 0.375, 0.625, 0.5 + y_change, 0.625));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 1.0625 + y_change, 0.375, 0.625, 1.1875 + y_change, 0.625));
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0.75 + y_change, 0.375, 0.625, 0.8125 + y_change, 0.625));
-
-        return shape;
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        float y_change = state.get(LOWERED) ? -0.5f : 0.0f;
-        return VoxelShapes.cuboid(0.375f, y_change, 0.375f, 0.625f, 1.5f + y_change, 0.625f);
+        // By default, the OutlineShape for the block will be a full cube,
+        // otherwise it will be a cube moved .5 blocks down.
+        return state.get(LOWERED)
+                ? VoxelShapes.cuboid(0.0f, -0.5f, 0.0f, 1.0f, 0.5f, 1.0f)
+                : VoxelShapes.fullCube();
     }
 }

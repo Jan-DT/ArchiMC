@@ -12,7 +12,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import nl.jandt.archimc.utils.RotatableVoxelShape;
+import nl.jandt.archimc.util.RotatableVoxelShape;
 
 import java.util.Objects;
 
@@ -27,24 +27,28 @@ public class ArmlessChair extends HorizontalFacingBlock {
         builder.add(Properties.HORIZONTAL_FACING);
     }
 
+    /**
+     * Builds the VoxelShape for this block, to be passed to the RotatableVoxelShape initializer.
+     * @return {@link VoxelShape} for the block
+     */
     private static VoxelShape baseShape() {
         VoxelShape shape = VoxelShapes.empty();
 
+        // Uses a simplified VoxelShape due to its complicated shape.
         shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.1875, 0, 0.1875, 0.8125, 0.5, 0.8125));
         shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.1875, 0.5, 0.6875, 0.8125, 1.0625, 0.8125));
 
         return shape;
     }
 
+    // Initializes the RotatableVoxelShape, which calculates all rotations on init.
     private final RotatableVoxelShape rotatableShape = new RotatableVoxelShape(baseShape(), Direction.NORTH);
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext ctx) {
         Direction direction = state.get(FACING);
-        return switch (direction) {
-            case NORTH, EAST, SOUTH, WEST -> rotatableShape.get(direction);
-            default -> VoxelShapes.fullCube();
-        };
+        // Gets the rotated VoxelShape in the requested direction from the RotatableVoxelShape.
+        return rotatableShape.get(direction);
     }
 
     @Override

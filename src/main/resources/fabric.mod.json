@@ -3,7 +3,7 @@
   "id": "archimc",
   "version": "${version}",
   "name": "ArchiMC",
-  "description": "A Minecraft mod that adds a range of blocks and items, aimed to improve your experience building realistic cities. Idea inspired by the Cubed resource pack.",
+  "description": "A Minecraft mod that adds a range of blocks and items, aimed to improve your experience building realistic cities.",
   "authors": [
     "4FA"
   ],

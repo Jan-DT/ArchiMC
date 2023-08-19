@@ -48,6 +48,9 @@ public final class BlockRegistry {
     public static final ArmlessChair CRIMSON_ARMLESS_CHAIR = new ArmlessChair(FabricBlockSettings.copyOf(Blocks.OAK_STAIRS));
     public static final ArmlessChair WARPED_ARMLESS_CHAIR = new ArmlessChair(FabricBlockSettings.copyOf(Blocks.OAK_STAIRS));
 
+    /**
+     * Registers all blocks in the mod. Does not contain items.
+     */
     public static void registerAll() {
         /// STREET DECORATIONS
         // Modern Bollard
@@ -79,14 +82,29 @@ public final class BlockRegistry {
         registerBlockItem(new Identifier(ArchiMC.MOD_ID, "warped_armless_chair"), WARPED_ARMLESS_CHAIR, ArchiMC.ITEM_GROUP_FURNITURE);
     }
 
+    /**
+     * Registers a block and the corresponding item, and adds it to an {@link ItemGroup}.
+     *
+     * @param id Identifier for this block
+     * @param block Block instance for this block
+     * @param itemGroupKey {@link RegistryKey} of the ItemGroup to add this block to (optional)
+     */
     public static void registerBlockItem(Identifier id, Block block, RegistryKey<ItemGroup> itemGroupKey) {
+        // Registers blocks as both block and item. When ItemGroup is specified, add the item to it.
         Registry.register(Registries.BLOCK, id, block);
         Registry.register(Registries.ITEM, id, new BlockItem(block, new FabricItemSettings()));
 
         ItemGroupEvents.modifyEntriesEvent(itemGroupKey).register(content -> content.add(block));
     }
 
+    /**
+     * Same as {@link BlockRegistry#registerBlockItem(Identifier, Block, RegistryKey)},
+     * but does not register the {@link ItemGroup}.
+     *
+     * @see BlockRegistry#registerBlockItem(Identifier, Block, RegistryKey)
+     */
     public static void registerBlockItem(Identifier id, Block block) {
+        // Registers blocks as both block and item. Will not register to ItemGroup.
         Registry.register(Registries.BLOCK, id, block);
         Registry.register(Registries.ITEM, id, new BlockItem(block, new FabricItemSettings()));
     }
